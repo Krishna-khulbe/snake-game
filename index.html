@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic page setup -->
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Snake Game</title>
 
-  <!-- Nunito font (the rounded font used in the screenshot) -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -17,21 +17,15 @@
 
   <main class="game">
 
-    <!-- ========== TOP BAR: high score | score | time ========== -->
+  
     <header class="stats">
       <div class="stat-box stat-side">High Score : <span id="high-score">00</span></div>
       <div class="stat-box stat-middle">Score : <span id="score">0</span></div>
       <div class="stat-box stat-side">time : <span id="time">00-00</span></div>
     </header>
 
-    <!-- ========== GAME BOARD ==========
-         The grid lines are drawn by CSS, so they show up even with no JavaScript.
-         Snake and food are just squares placed on the grid with
-         grid-column / grid-row (1 = first column / first row). -->
-    <section class="board" id="board">
+  <section class="board" id="board">
 
-      <!-- DEMO CONTENT so the page looks like the screenshot.
-           Delete these once your JavaScript draws the snake and food. -->
       <div class="cell food"  style="grid-column: 9;  grid-row: 6;"></div>
 
       <div class="cell snake" style="grid-column: 17; grid-row: 8;"></div>
@@ -43,9 +37,6 @@
 
     </section>
   </main>
-
-  <!-- ========== START / GAME OVER POPUP (hidden by default) ==========
-       JavaScript removes the "hidden" class to show it. -->
   <div class="modal hidden" id="modal">
     <div class="modal-content">
       <h2 id="modal-title">Snake</h2>
