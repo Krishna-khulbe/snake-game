@@ -1,0 +1,152 @@
+/* =========================================================
+   1. VARIABLES - change colours and sizes here
+   ========================================================= */
+:root {
+  --bg: #101010;                          /* page background */
+  --line: rgba(255, 255, 255, 0.85);      /* outlines of boxes and board */
+  --grid-line: rgba(255, 255, 255, 0.2);  /* thin lines inside the board */
+  --snake: #d9d9d9;                       /* snake colour */
+  --food: #ff7b7b;                        /* food colour */
+  --text: #f2f2f2;                        /* text colour */
+  --cell-size: 31px;                      /* size of one grid square */
+}
+
+/* =========================================================
+   2. RESET + PAGE BASICS
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+
+/* =========================================================
+   3. PAGE LAYOUT (flexbox, stacked vertically)
+   Top bar takes its natural height, board fills the rest.
+   ========================================================= */
+.game {
+  height: 100vh;
+  padding: 20px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =========================================================
+   4. TOP BAR (flexbox, three boxes in a row)
+   ========================================================= */
+.stats {
+  display: flex;
+  justify-content: space-between;   /* left box, middle box, right box */
+  align-items: center;
+}
+
+.stat-box {
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.stat-side   { width: 23%; }   /* High Score + time boxes */
+.stat-middle { width: 20%; }   /* Score box */
+
+/* =========================================================
+   5. GAME BOARD (CSS grid)
+   - The grid tracks are as many fixed-size squares as will fit.
+   - The visible grid lines are a repeating background image,
+     so they appear even before any JavaScript runs.
+   ========================================================= */
+.board {
+  flex: 1;              /* fill the space under the top bar */
+  min-height: 0;        /* lets a flex child shrink so it doesn't overflow */
+  border: 2px solid var(--line);
+  overflow: hidden;     /* hide any partial square at the edges */
+
+  /* grid lines: one vertical + one horizontal line per square */
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--cell-size) var(--cell-size);
+
+  /* the grid that snake/food squares are placed on.
+     JavaScript can change --cols / --rows if it wants exact numbers. */
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 60), var(--cell-size));
+  grid-template-rows: repeat(var(--rows, 40), var(--cell-size));
+}
+
+/* One snake/food square - drawn slightly inside its grid square
+   so the grid lines stay visible around it */
+.cell {
+  margin: 1px 0 0 1px;
+}
+
+.cell.snake { background: var(--snake); }
+.cell.food  { background: var(--food); }
+
+/* =========================================================
+   6. START / GAME OVER POPUP
+   ========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;                          /* cover the whole screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(16, 16, 16, 0.85);
+  z-index: 10;                       /* above the board */
+}
+
+.modal.hidden { display: none; }     /* JS toggles this class */
+
+.modal-content {
+  text-align: center;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 40px 56px;
+  background: var(--bg);
+}
+
+.modal-content h2 { font-size: 2.4rem; margin-bottom: 8px; }
+.modal-content p  { opacity: 0.7; margin-bottom: 24px; }
+
+/* =========================================================
+   7. BUTTON
+   ========================================================= */
+.btn {
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 28px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover { background: var(--text); color: var(--bg); }
+
+/* =========================================================
+   8. SMALL SCREENS
+   ========================================================= */
+@media (max-width: 800px) {
+  :root { --cell-size: 24px; }
+  .stat-box { font-size: 1rem; padding: 10px 0; }
+}
