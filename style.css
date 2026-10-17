@@ -1,9 +1,7 @@
-/* =========================================================
-   1. VARIABLES - change colours and sizes here
-   ========================================================= */
+
 :root {
-  --bg: #101010;                          /* page background */
-  --line: rgba(255, 255, 255, 0.85);      /* outlines of boxes and board */
+  --bg: #101010;                        
+  --line: rgba(255, 255, 255, 0.85);    
   --grid-line: rgba(255, 255, 255, 0.2);  /* thin lines inside the board */
   --snake: #d9d9d9;                       /* snake colour */
   --food: #ff7b7b;                        /* food colour */
@@ -11,9 +9,6 @@
   --cell-size: 31px;                      /* size of one grid square */
 }
 
-/* =========================================================
-   2. RESET + PAGE BASICS
-   ========================================================= */
 * {
   margin: 0;
   padding: 0;
@@ -31,10 +26,6 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
-/* =========================================================
-   3. PAGE LAYOUT (flexbox, stacked vertically)
-   Top bar takes its natural height, board fills the rest.
-   ========================================================= */
 .game {
   height: 100vh;
   padding: 20px 16px 16px;
@@ -43,9 +34,6 @@ body {
   gap: 24px;
 }
 
-/* =========================================================
-   4. TOP BAR (flexbox, three boxes in a row)
-   ========================================================= */
 .stats {
   display: flex;
   justify-content: space-between;   /* left box, middle box, right box */
@@ -65,12 +53,6 @@ body {
 .stat-side   { width: 23%; }   /* High Score + time boxes */
 .stat-middle { width: 20%; }   /* Score box */
 
-/* =========================================================
-   5. GAME BOARD (CSS grid)
-   - The grid tracks are as many fixed-size squares as will fit.
-   - The visible grid lines are a repeating background image,
-     so they appear even before any JavaScript runs.
-   ========================================================= */
 .board {
   flex: 1;              /* fill the space under the top bar */
   min-height: 0;        /* lets a flex child shrink so it doesn't overflow */
@@ -83,8 +65,7 @@ body {
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: var(--cell-size) var(--cell-size);
 
-  /* the grid that snake/food squares are placed on.
-     JavaScript can change --cols / --rows if it wants exact numbers. */
+  /* the grid that snake/food squares are placed on. */
   display: grid;
   grid-template-columns: repeat(var(--cols, 60), var(--cell-size));
   grid-template-rows: repeat(var(--rows, 40), var(--cell-size));
@@ -99,9 +80,6 @@ body {
 .cell.snake { background: var(--snake); }
 .cell.food  { background: var(--food); }
 
-/* =========================================================
-   6. START / GAME OVER POPUP
-   ========================================================= */
 .modal {
   position: fixed;
   inset: 0;                          /* cover the whole screen */
@@ -125,9 +103,6 @@ body {
 .modal-content h2 { font-size: 2.4rem; margin-bottom: 8px; }
 .modal-content p  { opacity: 0.7; margin-bottom: 24px; }
 
-/* =========================================================
-   7. BUTTON
-   ========================================================= */
 .btn {
   font-family: inherit;
   font-size: 1.1rem;
@@ -143,9 +118,6 @@ body {
 
 .btn:hover { background: var(--text); color: var(--bg); }
 
-/* =========================================================
-   8. SMALL SCREENS
-   ========================================================= */
 @media (max-width: 800px) {
   :root { --cell-size: 24px; }
   .stat-box { font-size: 1rem; padding: 10px 0; }
